@@ -2,7 +2,6 @@ const { Router } = require('express');
 const {
   createPokemon,
   deletePokemon,
-  getHistory,
   findPokemon,
   findPokemons,
   updatePokemon,
