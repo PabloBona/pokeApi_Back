@@ -6,13 +6,14 @@ const {
   findPokemons,
   updatePokemon,
 } = require('../controllers/pokemon.controllers.js');
+const { validExistPokemon } = require('../middlewares/pokemon.middleware.js');
 
 const router = Router();
 
 //Get routes
 
 router.get('/', findPokemons);
-router.get('/:id', findPokemon);
+router.get('/:id', validExistPokemon, findPokemon);
 
 //Post routes
 
@@ -22,7 +23,7 @@ router.post('/create', createPokemon);
 router.patch('/update/:id', updatePokemon);
 
 //delete routes
-router.patch('/delete/:id', deletePokemon);
+router.patch('/delete/:id', validExistPokemon, deletePokemon);
 
 module.exports = {
   pokemonRouter: router,

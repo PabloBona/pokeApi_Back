@@ -26,27 +26,8 @@ const findPokemons = async (req, res) => {
 
 const findPokemon = async (req, res) => {
   try {
-    // 1. OBTENER EL ID DE LOS PARAMETROS
-    const { id } = req.params;
+    const { pokemon } = req;
 
-    // 2. BUSCAR AL USUARIO CON EL ID QUE VENIA DE LOS PARAMETROS, Y QUE EL STATUS SEA TRUE
-    const pokemon = await Pokemon.findOne({
-      attributes: ['id', 'name', 'image'],
-      where: {
-        id,
-        status: 'available',
-      },
-    });
-
-    // 3. SI NO EXISTE EL USUARIO ENVIAR UNA RESPUESTA DE ERROR
-    if (!pokemon) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Pokemon not found',
-      });
-    }
-
-    // 4. ENVIAR UNA RESPUESTA AL USUARIO
     res.status(200).json({
       status: 'success',
       message: 'User was found successfully',
@@ -102,16 +83,17 @@ const updatePokemon = async (req, res = response) => {
   });
 };
 const deletePokemon = async (req, res) => {
-  // 1. Get the ID from the parameters
-  const { id } = req.params;
+  const { pokemon } = req;
+  // // 1. Get the ID from the parameters
+  // const { id } = req.params;
 
-  // 2. Find the pokemon with the given ID and with status "available"
-  const pokemon = await Pokemon.findOne({
-    where: {
-      id,
-      status: 'available',
-    },
-  });
+  // // 2. Find the pokemon with the given ID and with status "available"
+  // const pokemon = await Pokemon.findOne({
+  //   where: {
+  //     id,
+  //     status: 'available',
+  //   },
+  // });
 
   // 3. If the pokemon does not exist, return an error response
   if (!pokemon) {
